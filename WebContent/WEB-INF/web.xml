@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>leilao</display-name>
   <welcome-file-list>
+    <welcome-file>index.jsf</welcome-file>  
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- Os servlet dizem ao Apache Tomcat que o JSF (FacesServelet) 
+  está instalado e vai responder pelas requisições -->
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -18,4 +20,26 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.jsf</url-pattern>
   </servlet-mapping>
+  
+  <!-- javax.faces.PROJECT_STAGE é de uso opcinal e serve para 
+  definir em qual fase de desenvolvimento encontra-se o projeto -->
+  <context-param>
+ 	<param-name>javax.faces.PROJECT_STAGE</param-name>
+ 	<param-value>Development</param-value>
+  </context-param>
+  
+  <!-- Javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL serve 
+  para que os valores submetidos como vazio "" sejam recebidos como null-->
+   <context-param>
+  	<param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+  	<param-value>true</param-value>
+  </context-param>
+  
+  <!-- javax.faces.DATETIMECONVERT_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE serve 
+  para definir que os campos de data e hora utilizaraão o fuso horário definido no sistema.
+   -->
+  <context-param>
+  	<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+  	<param-value>true</param-value>
+  </context-param>
 </web-app>
