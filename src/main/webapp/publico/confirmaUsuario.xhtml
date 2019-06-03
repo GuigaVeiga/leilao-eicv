@@ -10,12 +10,10 @@
 <h:body>
 	<h1>Cadastre-se para entrar no leilão</h1>
 	<hr />
-			Nome: <h:outputText  value="#{usuarioBean.nome}" /> <br />
-			E-Mail: <h:outputLink value="mailto:#{usuarioBean.email}" >
-			<h:outputText value="#{usuarioBean.email}"/>
-			</h:outputLink> <br />
-			Contato: <h:outputText value="#{usuarioBean.contato}"/>
-			<h:outputText />
+			<h1><h:outputText  value="#{usuarioBean.usuario.nome}" />, seja Bem-vindo </h1>
+			Seu cadastro foi efetuado com sucesso.
+			<br />
+			Clique <a href="login.jsf">aqui</a> para efetuar o login.
 	<hr />		
 </h:body>
 </h:html>

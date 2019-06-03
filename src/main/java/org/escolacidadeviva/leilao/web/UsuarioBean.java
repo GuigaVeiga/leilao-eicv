@@ -5,44 +5,51 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-@ManagedBean
+import org.escolacidadeviva.leilao.usuario.Usuario;
+import org.escolacidadeviva.leilao.usuario.UsuarioRN;
+
+@ManagedBean(name="usuarioBean")
 @RequestScoped
 public class UsuarioBean {
 	
-	private String nome;
-	private String email;
-	private String contato;
+	private Usuario usuario = new Usuario();
+	private String confirmarSenha;
 	
 	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getContato() {
-		return contato;
-	}
-	public void setContato(String contato) {
-		this.contato = contato;
+	public String novo() {
+		return "/publico/cadastro";
 	}
 	
-
+	
 	public String salvar() {
-		
 		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cadastro Realizado com Sucesso", ""));
 		
-		return "leilao";
+		String senha = this.usuario.getSenha();
+		if(!senha.equals(this.confirmarSenha)) {
+			FacesMessage facesMessage = new FacesMessage("A senha não foi confirmada corretamente");
+			context.addMessage(null, facesMessage);
+			
+			return null;
+		}
 		
+		UsuarioRN usuarioRN = new UsuarioRN();
+		usuarioRN.salvar(this.usuario);
+		
+		return "confirmaUsuario";
 	}
 	
-
-
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
+	}
+	
+	
 }
