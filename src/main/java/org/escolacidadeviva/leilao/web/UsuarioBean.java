@@ -1,5 +1,7 @@
 package org.escolacidadeviva.leilao.web;
 
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -14,12 +16,19 @@ public class UsuarioBean {
 	
 	private Usuario usuario = new Usuario();
 	private String confirmarSenha;
+	private List<Usuario> lista;
+	private String destinoSalvar;
 	
 	
 	public String novo() {
+		this.destinoSalvar = "confirmaUsuario";
 		return "/publico/cadastro";
 	}
 	
+	public String editar() {
+		this.confirmarSenha = this.usuario.getSenha();
+		return "/publico/cadastro";
+	}
 	
 	public String salvar() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -35,7 +44,22 @@ public class UsuarioBean {
 		UsuarioRN usuarioRN = new UsuarioRN();
 		usuarioRN.salvar(this.usuario);
 		
-		return "confirmaUsuario";
+		return this.destinoSalvar;
+	}
+	
+	public String excluir() {
+		UsuarioRN usuarioRN = new UsuarioRN();
+		usuarioRN.excluir(this.usuario);
+		this.lista = null;
+		return null;
+	}
+
+	public List<Usuario> getLista() {
+		if (this.lista == null) {
+			UsuarioRN usuarioRN = new UsuarioRN();
+			this.lista = usuarioRN.listar();
+		}
+		return this.lista;
 	}
 	
 	public Usuario getUsuario() {
@@ -50,6 +74,11 @@ public class UsuarioBean {
 	public void setConfirmarSenha(String confirmarSenha) {
 		this.confirmarSenha = confirmarSenha;
 	}
-	
+	public String getDestinoSalvar() {
+		return destinoSalvar;
+	}
+	public void setDestinoSalvar(String destinoSalvar) {
+		this.destinoSalvar = destinoSalvar;
+	}
 	
 }
