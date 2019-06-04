@@ -17,6 +17,7 @@ public class Usuario implements Serializable {
 	@org.hibernate.annotations.NaturalId
 	private String login;
 	private String senha;
+	
 	public Integer getCodigo() {
 		return codigo;
 	}
