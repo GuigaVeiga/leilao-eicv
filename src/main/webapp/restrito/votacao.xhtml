@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">Leilão EICV</ui:insert></title> 
+	<h:outputStylesheet library="css" name="estilo.css"/> 
+	<style type="text/css">
+	<!-- #logotipo { text-align: right; float: right;} -->
+	</style>
+<title>Votação EICV</title>
+</h:head>
+
+<h:body>
+		<div>
+			<h:graphicImage library="imagens" name="logo_m.png" style="margin-top: 10px; margin-left: 74%;"/>
+		</div>
+		<br />
+<sec:authorize ifAnyGranted="ROLE_USUARIO">
+		<h:panelGroup>
+			<h:form id="menu" style="background-color: #14293c; height: 50px; padding: 5px;">
+				<table>
+					<tr>
+						<td align="left">
+							<h:commandButton action="/restrito/lance" value="Lances"></h:commandButton>
+						</td>
+						<td align="left">
+							<h:commandButton action="/restrito/votacao" value="Votação"></h:commandButton>
+						</td>
+						<td align="right">
+						<sec:authorize ifAnyGranted="ROLE_ADMINISTRADOR">
+								<h:panelGroup>
+									<h:commandLink action="/admin/administrador" title="Administrativo">
+										<h:graphicImage library="imagens" name="administrativo16.png" />
+									</h:commandLink>
+								</h:panelGroup>
+							</sec:authorize>
+						</td>
+						<td align="right">	
+							<h:commandLink action="/restrito/home" title="Principal">
+								<h:graphicImage library="imagens" name="principal16.png" />
+							</h:commandLink>
+						</td>
+						<td align="right">	
+							 <h:outputLink value="javascript:void(0)"
+								onclick="document.location='#{request.contextPath}/j_spring_security_logout'"
+								title="Sair">
+								<h:graphicImage library="imagens" name="logout16.png" />
+							</h:outputLink>
+						</td>
+					</tr>
+				</table>
+
+			</h:form>
+		</h:panelGroup>
+</sec:authorize>		
+	
+		
+	<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_Mm1sbqi6a-uJFwd7L-pP1me9NC9xjBGKh3JGmm8hEN53wQ/viewform?embedded=true" 
+			width="800" 
+			height="auto"
+			style="margin-left: 400px;">
+			Carregando…</iframe>
+	
+
+</h:body>
+</html>
+
