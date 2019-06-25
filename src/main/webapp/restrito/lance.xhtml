@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/interna.xhtml">
+
+	<ui:define name="titulo">
+	Leilão EICV
+	</ui:define>
+
+
+	<ui:define name="corpo">
+
+		<h:form id="listagemGeral">
+			<p:dataTable value="#{lanceBean.listarTodos}" var="lance"
+				style="margin-top:50px" reflow="true" sortBy="#{lance.id_img}"
+				rows="20" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15" widgetVar="lanceTable">
+
+				<p:column filterBy="#{lance.id_img}" headerText="ID"
+					sortBy="#{lance.id_img}">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('lanceTable').filter()"
+							styleClass="custom-filter" converter="javax.faces.Integer">
+							<f:selectItem itemLabel="Selecione um ID" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{imagensBean.imagens}" />
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="#{lance.id_img}" />
+				</p:column>
+
+				<p:column headerText="Lance" sortBy="#{lance.valorLance}">
+					<h:outputText value="#{lance.valorLance}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
+

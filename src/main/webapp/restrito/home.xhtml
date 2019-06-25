@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
+
+
+<ui:composition template="/templates/interna.xhtml">
+
+	<ui:define name="titulo">
+	Leilão EICV
+	</ui:define>
+
+
+	<ui:define name="corpo">
+	Usuário logado: #{request.remoteUser}
+	
+	<h:form id="turmasHome">
+			<h:panelGrid  columns="10" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
+				
+				<h:commandLink action="/restrito/1em">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>1° Ano EM</h:outputLabel>
+				
+				<h:commandLink action="/restrito/2em">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>2° Ano EM</h:outputLabel>
+				
+				<h:commandLink action="/restrito/2a">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>2° Ano A</h:outputLabel>
+				
+				<h:commandLink action="/restrito/2b">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>2° Ano B</h:outputLabel>
+				
+				<h:commandLink action="/restrito/3a">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>3° Ano A</h:outputLabel>
+				
+				<h:commandLink action="/restrito/3b">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>3° Ano B</h:outputLabel>
+				
+				<h:commandLink action="/restrito/3c">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>3° Ano C</h:outputLabel>
+				
+				<h:commandLink action="/restrito/4a">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>4° Ano A</h:outputLabel>
+				
+				<h:commandLink action="/restrito/4b">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>4° Ano B</h:outputLabel>
+				
+				<h:commandLink action="/restrito/5a">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>5° Ano A</h:outputLabel>
+				
+				<h:commandLink action="/restrito/5b">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>5° Ano B</h:outputLabel>
+				
+				<h:commandLink action="/restrito/6a">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>6° Ano A</h:outputLabel>
+				
+				<h:commandLink action="/restrito/6b">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>6° Ano B</h:outputLabel>
+				
+				<h:commandLink action="/restrito/7a">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>7° Ano A</h:outputLabel>
+				
+				<h:commandLink action="/restrito/7b">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>7° Ano B</h:outputLabel>
+				
+				<h:commandLink action="/restrito/8a">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>8° Ano A</h:outputLabel>
+				
+				<h:commandLink action="/restrito/8b">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>8° Ano B</h:outputLabel>
+				
+				<h:commandLink action="/restrito/9a">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>9° Ano A</h:outputLabel>
+				
+				<h:commandLink action="/restrito/9b">
+					<h:graphicImage library="imagens" name="paleta.png" />
+				</h:commandLink>
+				<h:outputLabel>9° Ano B</h:outputLabel>
+				
+			</h:panelGrid>	
+		</h:form>
+		
+
+	</ui:define>
+</ui:composition>
+</html>

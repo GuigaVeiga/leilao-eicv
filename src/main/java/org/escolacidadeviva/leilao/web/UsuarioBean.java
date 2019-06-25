@@ -21,7 +21,9 @@ public class UsuarioBean {
 	
 	
 	public String novo() {
-		this.destinoSalvar = "confirmaUsuario";
+		this.destinoSalvar = "login";
+		this.usuario = new Usuario();
+		this.usuario.setAtivo(true);
 		return "/publico/cadastro";
 	}
 	
@@ -53,6 +55,18 @@ public class UsuarioBean {
 		this.lista = null;
 		return null;
 	}
+	
+	public String ativar() {
+		if (this.usuario.isAtivo())
+			this.usuario.setAtivo(false);
+		else
+			this.usuario.setAtivo(true);
+
+		UsuarioRN usuarioRN = new UsuarioRN();
+		usuarioRN.salvar(this.usuario);
+		return null;
+	}
+
 
 	public List<Usuario> getLista() {
 		if (this.lista == null) {
@@ -60,6 +74,18 @@ public class UsuarioBean {
 			this.lista = usuarioRN.listar();
 		}
 		return this.lista;
+	}
+	
+	public String atribuiPermissao(Usuario usuario, String permissao) {
+		this.usuario = usuario;
+		java.util.Set<String> permissoes = this.usuario.getPermissao();
+		if (permissoes.contains(permissao)) {
+			permissoes.remove(permissao);
+		} else {
+			permissoes.add(permissao);
+		}
+		
+		return null;
 	}
 	
 	public Usuario getUsuario() {

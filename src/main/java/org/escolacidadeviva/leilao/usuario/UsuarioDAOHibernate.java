@@ -8,10 +8,6 @@ import org.hibernate.Session;
 public class UsuarioDAOHibernate implements UsuarioDAO {
 	private Session session;
 
-	public UsuarioDAOHibernate() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	public void setSession(Session session) {
 		this.session = session;
 	}
@@ -23,6 +19,10 @@ public class UsuarioDAOHibernate implements UsuarioDAO {
 
 	@Override
 	public void atualizar(Usuario usuario) {
+		if (usuario.getPermissao() == null || usuario.getPermissao().size() == 0 ) {
+			Usuario usuarioPermissao = this.carregar(usuario.getCodigo());
+			this.session.evict(usuarioPermissao);
+		}
 		this.session.update(usuario);
 	}
 
@@ -38,12 +38,14 @@ public class UsuarioDAOHibernate implements UsuarioDAO {
 
 	@Override
 	public Usuario buscarPorLogin(String login) {
-		String hql = "select u from usuario u where u.login = :login";
+		String hql = "select u from Usuario u where u.login = :login";
 		Query consulta = this.session.createQuery(hql);
 		consulta.setString("login", login);
 		return (Usuario) consulta.uniqueResult();
 	}
+	
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> listar() {
 		return this.session.createCriteria(Usuario.class).list();	

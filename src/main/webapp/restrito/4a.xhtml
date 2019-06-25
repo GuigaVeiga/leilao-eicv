@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/interna.xhtml">
+
+	<ui:define name="titulo">
+	Leilão EICV
+	</ui:define>
+
+
+	<ui:define name="corpo">
+	    <h4>Usuário: #{request.remoteUser}</h4>
+	
+		<div class="ui-fluid">
+			<br /> <br />
+			<div>
+
+				<h:form class="galleria">
+					<p:panelGrid columns="2" layout="grid"
+						styleClass="ui-panelgrid-blank"
+						columnClasses="ui-g-12 ui-md-4,ui-g-12 ui-md-8">
+						<h:outputText></h:outputText>
+						<p:galleria value="#{imagensBean.ano4A}" var="image"
+							panelWidth="600" panelHeight="500" showCaption="true">
+							<p:graphicImage width="100%" name="imagens/4A/#{image}.jpg"
+								alt="O ID da imagem é #{image}" title="ID: #{image}" />
+						</p:galleria>
+						<h:outputText></h:outputText>
+					</p:panelGrid>
+				</h:form>
+			</div>
+			<br />
+
+			<h:form id="formEdicao">
+				<h:messages />
+				<div class="ui-g-12 ui-md-6">
+					<p:panelGrid columns="2" layout="grid"
+						styleClass="ui-panelgrid-blank"
+						columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-8">
+
+						<p:outputLabel></p:outputLabel>
+						<h:selectOneMenu value="#{lanceBean.selecionada.turma}">
+							<f:selectItem itemLabel="4° Ano A" itemValue="4° Ano A" />
+						</h:selectOneMenu>
+
+						<h:outputLabel value="Id da imagem" for="id_img" />
+						<p:selectOneMenu id="id_img"
+							value="#{lanceBean.selecionada.id_img}"
+							converter="javax.faces.Integer" required="true">
+							<f:selectItem itemLabel="Selecione o ID" />
+							<f:selectItems value="#{imagensBean.ano4A}" var="m"
+								itemLabel="#{m}" itemValue="#{m}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Lance" for="lance" />
+						<p:inputText id="lance"
+							value="#{lanceBean.selecionada.valorLance}" size="10"
+							required="true">
+							<f:convertNumber minFractionDigits="2" />
+						</p:inputText>
+
+					</p:panelGrid>
+
+
+					<h:panelGrid id="btnSalvar" columns="2">
+						<p:outputLabel></p:outputLabel>
+
+						<p:commandButton value="Lançar" action="#{lanceBean.salvar}"
+							update=":formEdicao :listagem" process="@form" />
+					</h:panelGrid>
+				</div>
+			</h:form>
+
+			<h:form id="listagem">
+				<p:dataTable value="#{lanceBean.listarTodos}" var="lance"
+					style="margin-top:50px" reflow="true"
+					rendered="#{!empty lanceBean.listarTodos}" sortBy="#{lance.id_img}"
+					rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" widgetVar="lanceTable">
+
+					<p:column filterBy="#{lance.id_img}" headerText="ID"
+						sortBy="#{lance.id_img}">
+						<f:facet name="filter">
+							<p:selectOneMenu onchange="PF('lanceTable').filter()"
+								styleClass="custom-filter" converter="javax.faces.Integer">
+								<f:selectItem itemLabel="Selecione um ID" itemValue="#{null}"
+									noSelectionOption="true" />
+								<f:selectItems value="#{imagensBean.ano4A}" />
+							</p:selectOneMenu>
+						</f:facet>
+						<h:outputText value="#{lance.id_img}" />
+					</p:column>
+
+					<p:column headerText="Lance" sortBy="#{lance.valorLance}">
+						<h:outputText value="#{lance.valorLance}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
